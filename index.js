@@ -3,23 +3,27 @@
 const fs = require('fs');
 const args = process.argv.slice(2);
 const sourceFile = args[0];
+
 const md = require('markdown-it')();
+
 const removeMd = require('remove-markdown');
-const Handlebars = require('handlebars');
 const removeMdOptions = { stripListLeaders: false}
+
+const Handlebars = require('handlebars');
+Handlebars.registerHelper("md", (it) => md.renderInline(it));
 
 const template = `
 {{#each this}}
 <section>
-    <h3>{{header}}</h3>
+    <h3>{{md header}}</h3>
     {{#each questions}}
     <section>
-        <h4>Tanya: {{question}}</h4>
+        <h4>Tanya: {{md question}}</h4>
         {{#each answer}}
         {{#if @first}}
-        <p>Jawab: {{this}}</p>
+        <p>Jawab: {{md this}}</p>
         {{else}}
-        <p>{{this}}</p>
+        <p>{{md this}}</p>
         {{/if}}
         {{/each}}
     </section>
