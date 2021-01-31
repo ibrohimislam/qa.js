@@ -8,6 +8,10 @@
   "bin": {
     "qa": "./index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ibrohimislam/qa.js"
+  },
   "dependencies": {
     "handlebars": "^4.7.6",
     "markdown-it": "^12.0.4",
