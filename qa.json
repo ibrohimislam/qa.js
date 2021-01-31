@@ -1,14 +1,19 @@
 [
   {
-    "question": "bla bla bla",
-    "answer": [
-      "bla bla [bla](https://www.google.com)",
-      "**bla** bla bla",
-      "bla *bla* bla"
+    "header": "some header",
+    "questions": [
+      {
+        "question": "bla bla bla?",
+        "answer": [
+          "bla bla [bla](https://www.google.com)",
+          "**bla** bla bla",
+          "bla *bla* bla"
+        ]
+      },
+      {
+        "question": "bla bla bla?",
+        "answer": ["bla bla bla"]
+      }
     ]
-  },
-  {
-    "question": "bla bla bla",
-    "answer": ["bla bla bla"]
   }
 ]

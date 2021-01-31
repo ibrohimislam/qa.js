@@ -6,32 +6,34 @@ const sourceFile = args[0];
 const md = require('markdown-it')();
 const removeMd = require('remove-markdown');
 const Handlebars = require('handlebars');
-const removeMdOptions = {
-    stripListLeaders: false
-}
+const removeMdOptions = { stripListLeaders: false}
 
-const template = `<section>
-    <h4>Tanya: {{question}}</h4>
-    {{#each answer}}
-    {{#if @first}}
-    <p>Jawab: {{this}}</p>
-    {{else}}
-    <p>{{this}}</p>
-    {{/if}}
+const template = `
+{{#each this}}
+<section>
+    <h3>{{header}}</h3>
+    {{#each questions}}
+    <section>
+        <h4>Tanya: {{question}}</h4>
+        {{#each answer}}
+        {{#if @first}}
+        <p>Jawab: {{this}}</p>
+        {{else}}
+        <p>{{this}}</p>
+        {{/if}}
+        {{/each}}
+    </section>
+    <span style="text-align: center;">----------</span>
     {{/each}}
 </section>
-<span style="text-align: center;">----------</span>`
+{{/each}}`
 
 const templateHandlebars = Handlebars.compile(template, {noEscape: true, preventIndent: false});
-
 
 if (sourceFile === undefined) {
     console.log("usage: qa [source-file]");
     process.exit(1);
 }
-
-const jsonLD = [];
-const html = [];
 
 const toJsonLD = (qa) => ({
     "@context":"http://schema.org/",
@@ -43,20 +45,11 @@ const toJsonLD = (qa) => ({
     }
 })
 
-const toHtml = (qa) => (templateHandlebars({
-    question: md.renderInline(qa.question),
-    answer: qa.answer.map(it => md.renderInline(it))
-}))
-
-qaList = JSON.parse(fs.readFileSync(sourceFile));
-for (qa of qaList) {
-    jsonLD.push(toJsonLD(qa))
-    html.push(toHtml(qa))
-}
+const content = JSON.parse(fs.readFileSync(sourceFile));
 
 console.log(`
 <script type="application/ld+json">
-${JSON.stringify(jsonLD, null, 4)}
+${JSON.stringify(content.flatMap((it) => it.questions).map(it => toJsonLD(it)), null, 4)}
 </script>
-${html.join("\n")}
+${templateHandlebars(content)}
 `);

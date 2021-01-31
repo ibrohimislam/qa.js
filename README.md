@@ -18,20 +18,23 @@ qa source.json > result.html
 
 ```
 [
-    {
-        "question": "bla bla bla",
+  {
+    "header": "some header",
+    "questions": [
+      {
+        "question": "bla bla bla?",
         "answer": [
-            "bla bla [bla](https://www.google.com)",
-            "**bla** bla bla",
-            "bla *bla* bla"
+          "bla bla [bla](https://www.google.com)",
+          "**bla** bla bla",
+          "bla *bla* bla"
         ]
-    },
-    {
-        "question": "bla bla bla",
-        "answer": [
-            "bla bla bla"
-        ]
-    }
+      },
+      {
+        "question": "bla bla bla?",
+        "answer": ["bla bla bla"]
+      }
+    ]
+  }
 ]
 ```
 
@@ -43,7 +46,7 @@ qa source.json > result.html
     {
         "@context": "http://schema.org/",
         "@type": "Question",
-        "text": "bla bla bla",
+        "text": "bla bla bla?",
         "acceptedAnswer": {
             "@type": "Answer",
             "text": "bla bla bla\nbla bla bla\nbla bla bla"
@@ -52,7 +55,7 @@ qa source.json > result.html
     {
         "@context": "http://schema.org/",
         "@type": "Question",
-        "text": "bla bla bla",
+        "text": "bla bla bla?",
         "acceptedAnswer": {
             "@type": "Answer",
             "text": "bla bla bla"
@@ -62,15 +65,18 @@ qa source.json > result.html
 </script>
 
 <section>
-    <h4>Tanya: <p>bla bla bla</p></h4>
-    <p>Jawab: <p>bla bla <a href="https://www.google.com">bla</a></p></p>
-    <p><p><strong>bla</strong> bla bla</p></p>
-    <p><p>bla <em>bla</em> bla</p></p>
+    <h3>some header</h3>
+    <section>
+        <h4>Tanya: bla bla bla?</h4>
+        <p>Jawab: bla bla [bla](https://www.google.com)</p>
+        <p>**bla** bla bla</p>
+        <p>bla *bla* bla</p>
+    </section>
+    <span style="text-align: center;">----------</span>
+    <section>
+        <h4>Tanya: bla bla bla?</h4>
+        <p>Jawab: bla bla bla</p>
+    </section>
+    <span style="text-align: center;">----------</span>
 </section>
-<span style="text-align: center;">----------</span>
-<section>
-    <h4>Tanya: <p>bla bla bla</p></h4>
-    <p>Jawab: <p>bla bla bla</p></p>
-</section>
-<span style="text-align: center;">----------</span>
 ```
