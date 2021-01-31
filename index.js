@@ -27,7 +27,7 @@ const template = `
         {{/if}}
         {{/each}}
     </section>
-    <span style="text-align: center;">----------</span>
+    <p style="text-align: center;">----------</p>
     {{/each}}
 </section>
 {{/each}}`
